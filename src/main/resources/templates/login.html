@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div  th:replace="html/fragment :: include-head"></div>
+    <title>登录</title>
+</head>
+
+<style>
+    body{
+        background-color: #2d3a4b;
+    }
+    .login-container{
+        width:450px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 160px 35px 0 35px;
+    }
+    h3{
+        color: #eee;
+        font-size: 26px;
+        font-weight: 700;
+        text-align: center;
+    }
+    .svg-icon{
+        width: 14px;
+        height: 14px;
+        fill: #889aa4;
+    }
+    span{
+        display: inline-block;
+        width: 14px;
+        padding: 6px 5px 6px 15px;
+    }
+    .form-div{
+        margin: 0 0 22px;
+    }
+    .form-item-div{
+        background-color: #283443;
+        width: 448px;
+        height: 48px;
+        border: 1px solid #889aa4;
+        border-radius: 4px;
+        line-height: 16px;
+    }
+    .input-div{
+        display: inline-block;
+        height: 46px;
+        width: 85%;
+    }
+    input{
+        background: transparent;
+        border: 0;
+        font-size: 14px;
+        color: #fff;
+        height: 46px;
+        line-height: 36px;
+        outline: none;
+        width: 400px;
+    }
+    input::placeholder{
+        color: #dcdfe6;
+    }
+    .error-div{
+        font-size: 12px;
+        line-height: 1;
+        color: #ff4949;
+        padding-top: 4px;
+        position: absolute;
+        display: none;
+    }
+    /*关闭google浏览器记录表单的默认配置*/
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active{
+        -webkit-transition-delay: 99999s;
+        -webkit-transition: color 99999s ease-out, background-color 99999s ease-out
+    }
+    button{
+        width: 448px;
+        padding: 10px 20px;
+        text-align: center;
+        color: #eee;
+        background-color: #1890ff;
+        border: 1px solid #1890ff;
+        box-shadow: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #46A6FF;
+    }
+</style>
+
+<body>
+    <div th:include="html/fragment :: include-svg"></div>
+    <div class="login-container">
+        <div>
+            <h3>登&nbsp;&nbsp;&nbsp;&nbsp;录</h3>
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div class="form-div">
+                <div class="form-item-div">
+                    <span>
+                        <svg class="svg-icon">
+                            <use xlink:href="#icon-user"></use>
+                        </svg>
+                    </span>
+                    <div class="input-div">
+                        <input type="text" name="username" placeholder="Username">
+                    </div>
+                </div>
+                <div class="error-div">
+                    请输入用户名
+                </div>
+            </div>
+            <div class="form-div">
+                <div class="form-item-div">
+                    <span>
+                        <svg class="svg-icon">
+                            <use xlink:href="#icon-password"></use>
+                        </svg>
+                    </span>
+                    <div class="input-div">
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="error-div">
+                    请输入密码
+                </div>
+            </div>
+            <button>登&nbsp;&nbsp;录</button>
+        </form>
+    </div>
+</body>
+</html>

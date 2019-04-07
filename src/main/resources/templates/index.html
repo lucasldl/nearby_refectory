@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div  th:replace="html/fragment :: include-head"></div>
+    <title>主页</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #left-div{
+        width: 200px !important;
+        height: 100%;
+        position: fixed;
+        z-index: 1001;
+        overflow: hidden;
+    }
+    #right-div{
+        min-height: 100%;
+        margin-left: 200px;
+        position: relative;
+    }
+    #left-ul{
+        width: 100%;
+        height: 100%;
+        background-color: rgb(48, 65, 86);
+    }
+    #right-div .head-div{
+        height: 50px;
+        overflow: hidden;
+        position: relative;
+        background: #fff;
+        box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    }
+    .hamburger{
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+    }
+</style>
+
+<body>
+    <div th:include="html/fragment :: include-svg"></div>
+    <div id="left-div">
+        <ul id="left-ul">
+
+        </ul>
+    </div>
+    <div id="right-div">
+        <div class="head-div">
+            <div id="">
+                <svg width="64" height="64" class="hamburger">
+                    <use xlink:href="#icon-hamburger"></use>
+                </svg>
+            </div>
+        </div>
+        <div class="content-div">
+
+        </div>
+    </div>
+</body>
+</html>
