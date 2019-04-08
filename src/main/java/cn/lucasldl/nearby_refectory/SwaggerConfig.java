@@ -19,7 +19,7 @@ public class SwaggerConfig {
                 "Nearby Refectory APIs 附近餐厅查看接口",
                 "基于springboot+mongodb开发",
                 "1.0.0",
-                "null",
+                "https://github.com/lucasldl/nearby_refectory/",
                 "lucas",
                 "lucas",
                 "null");
