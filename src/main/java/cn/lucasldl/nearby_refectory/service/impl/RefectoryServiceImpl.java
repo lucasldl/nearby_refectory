@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Ref;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Transactional
 @Service("refectoryService")
@@ -83,6 +84,15 @@ public class RefectoryServiceImpl implements RefectoryService {
             LOGGER.info("不存在此id的餐厅:" + id);
         }
         return(refectory);
+    }
+
+    @Override
+    public List<Refectory> findRefectoryByName(String name){
+        Query query = new Query();
+//        Pattern pattern = Pattern.compile("^.*" + name + ".*$", Pattern.CASE_INSENSITIVE);
+        query.addCriteria(Criteria.where("title").regex(name));
+        List<Refectory> list = mongoTemplate.find(query, Refectory.class);
+        return list;
     }
 
     /**

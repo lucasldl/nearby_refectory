@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div  th:replace="html/fragment :: include-head"></div>
+    <title>主页</title>
+</head>
+
+<style>
+    .content-div{
+        padding: 15px;
+        overflow: auto;
+    }
+    thead{
+        color: #909399;
+        font-weight: 500;
+        display: table-header-group;
+        vertical-align: middle;
+        overflow: hidden;
+        box-sizing: border-box;
+        flex: 1;
+        font-size: 14px;
+        max-width: 100%;
+        background-color: #fff;
+    }
+    tr{
+        width: 100%;
+        background-color: #fff;
+        display: table-row;
+        vertical-align: inherit;
+    }
+    th{
+        border-bottom: 1px solid #dfe6ec;
+        text-align: center;
+        overflow: hidden;
+        padding: 10px 0;
+        border-right: 1px solid #dfe6ec;
+    }
+    td{
+        color: #606266;
+        text-align: center;
+    }
+    .icon-edit{
+        fill: #1C9EFF;
+    }
+    .icon-trash{
+        fill: #FE0036;
+    }
+    .modal input,
+    .modal textarea{
+        box-sizing: border-box !important;
+    }
+</style>
+
+<body>
+    <div th:include="html/fragment :: include-svg"></div>
+    <div th:replace="html/fragment :: include-left-ul"></div>
+    <div id="right-div">
+        <div th:replace="html/fragment :: include-right-head"></div>
+        <div class="content-div">
+            <button class="btn btn-outline-primary" type="button" style="float: right;margin-bottom: 10px" data-toggle="modal" data-target="#add">添加</button>
+            <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="">添加</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-2" for="add-title">餐厅名:</label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" id="add-title">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-2" for="add-phone">联系电话:</label>
+                                    <div class="col-8">
+                                        <input type="text" id="add-phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-2" for="add-address">详细地址:</label>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control" id="add-address">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-2" for="add-location">坐标:</label>
+                                    <div class="col-8">
+                                        <input type="text" id="add-location" class="form-control" placeholder="经度,维度">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-2" for="add-introduce">简介:</label>
+                                    <div class="col-8">
+                                        <textarea rows="4" class="form-control" id="add-introduce"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="add-button">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="table-div">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">餐厅名</th>
+                            <th scope="col">联系电话</th>
+                            <th scope="col">详细地址</th>
+                            <th scope="col">简介</th>
+                            <th scope="col">坐标(经度,维度)</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="refectory, refectoryStat : ${isPage} == 0 ? ${result.list} : ${result}">
+                            <td th:text="${refectoryStat.count}">1</td>
+                            <td th:text="${refectory.title}">Mark</td>
+                            <td th:text="${refectory.phone}">Otto</td>
+                            <td th:text="${refectory.address}">@mdo</td>
+                            <td th:text="${refectory.introduce}">@mdo</td>
+                            <td th:text="${refectory.location[0]} + ',' + ${refectory.location[1]}">@mdo</td>
+                            <td>
+                                <a data-toggle="modal" th:attr="data-target='#edit_' + ${refectory.id}">
+                                    <svg width="18" height="18" class="icon-edit">
+                                        <use xlink:href="#icon-edit"></use>
+                                    </svg>
+                                </a>
+                                <a data-toggle="modal" th:attr="data-target='#del_' + ${refectory.id}">
+                                    <svg width="18" height="18" class="icon-trash">
+                                        <use xlink:href="#icon-trash"></use>
+                                    </svg>
+                                </a>
+                            </td>
+                            <div class="modal fade" th:id="'edit_' + ${refectory.id}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">编辑</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group row">
+                                                    <label th:for="'edit_' + ${refectory.id}" class="col-form-label col-2">ID:</label>
+                                                    <div class="col-8">
+                                                        <input type="text" th:id="'edit_' + ${refectory.id}" class="form-control" th:value="${refectory.id}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label th:for="'edit_' + ${refectory.id} + '_title'" class="col-form-label col-2">餐厅名:</label>
+                                                    <div class="col-8">
+                                                        <input type="text" th:id="'edit_' + ${refectory.id} + '_title'" class="form-control" th:value="${refectory.title}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label th:for="'edit_' + ${refectory.id} + '_phone'" class="col-form-label col-2">联系电话:</label>
+                                                    <div class="col-8">
+                                                        <input type="text" th:id="'edit_' + ${refectory.id} + '_phone'" class="form-control" th:value="${refectory.phone}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  th:for="'edit_' + ${refectory.id} + '_address'" class="col-form-label col-2">详细地址:</label>
+                                                    <div class="col-8">
+                                                        <input type="text" th:id="'edit_' + ${refectory.id} + '_address'" class="form-control" th:value="${refectory.address}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label th:for="'edit_' + ${refectory.id} + '_location'" class="col-form-label col-2">坐标:</label>
+                                                    <div class="col-8">
+                                                        <input type="text" th:id="'edit_' + ${refectory.id} + '_location'" class="form-control" th:value="${refectory.location[0]} + ',' + ${refectory.location[1]}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label th:for="'edit_' + ${refectory.id} + '_introduce'" class="col-form-label col-2">简介:</label>
+                                                    <div class="col-8">
+                                                        <textarea rows="4" class="form-control" th:id="'edit_' + ${refectory.id} + '_introduce'" th:text="${refectory.introduce}"></textarea>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-primary edit-update" th:value="${refectory.id}">修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" th:id="'del_' + ${refectory.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">提示</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            确认是否删除？
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                            <button type="button" class="btn btn-primary del-button" th:value="${refectory.id}">删除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation" th:if="${isPage} == 0">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item" th:if="${result.pageNum} gt 1"><a class="page-link" th:href="@{/admin/index(pageNum=${result.pageNum - 1})}">上一页</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{/admin/index(pageNum=1)}">首页</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{/admin/index(pageNum=${result.pages})}">尾页</a></li>
+                        <li class="page-item" th:if="${result.pageNum} lt ${result.pages}"><a class="page-link" th:href="@{/admin/index(pageNum=${result.pageNum + 1})}">下一页</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // 修改餐厅信息
+    $(".edit-update").click(function () {
+        var id = $(this).val();
+        var title = $("#edit_" + id + "_title").val();
+        var phone = $("#edit_" + id + "_phone").val();
+        var address = $("#edit_" + id + "_address").val();
+        var location = $("#edit_" + id + "_location").val();
+        var introduce = $("#edit_" + id + "_introduce").val();
+        $.ajax({
+            type: "post",
+            url: "[[@{/admin/update}]]?[(${_csrf.parameterName})]=[(${_csrf.token})]",
+            data: {
+                "id": id,
+                "title": title,
+                "phone": phone,
+                "address": address,
+                "location": location,
+                "introduce": introduce
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            },
+            error: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            }
+        });
+    });
+
+    // 删除餐厅
+    $(".del-button").click(function () {
+        var id = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "[[@{/admin/del}]]?[(${_csrf.parameterName})]=[(${_csrf.token})]",
+            data: {
+                "id": id
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            },
+            error: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            }
+        })
+    });
+
+    // 添加餐厅
+    $("#add-button").click(function () {
+        var title = $("#add-title").val();
+        var phone = $("#add-phone").val();
+        var address = $("#add-address").val();
+        var location = $("#add-location").val();
+        var introduce = $("#add-introduce").val();
+        $.ajax({
+            type: "post",
+            url: "[[@{/admin/add}]]?[(${_csrf.parameterName})]=[(${_csrf.token})]",
+            data:{
+                "title": title,
+                "phone": phone,
+                "address": address,
+                "location": location,
+                "introduce": introduce
+            },
+            dataType: "json",
+            success: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            },
+            error: function (data) {
+                alert(data.responseText);
+                window.location.reload();
+            }
+        })
+    });
+</script>
+
+</html>

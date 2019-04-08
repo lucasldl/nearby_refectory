@@ -18,15 +18,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/admin/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/login").permitAll()
 			.and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/index").failureUrl("/errors")
-				.usernameParameter("username").passwordParameter("password")
-			.and()
-				.logout().logoutSuccessUrl("/login");
+				.formLogin().loginPage("/login").defaultSuccessUrl("/index").failureUrl("/login")
+				.usernameParameter("username").passwordParameter("password");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/js/**", "/css/**");
+		web.ignoring().antMatchers("/js/**", "/css/**", "/images/**");
 	}
 
 	@Override

@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: unset;
+}
+svg{
+    vertical-align: unset;
+}
+/* 侧边栏 */
+#left-div{
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    z-index: 1001;
+    overflow: hidden;
+}
+/* 侧边栏 无序列表 */
+#left-ul{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(48, 65, 86);
+}
+#left-ul > div{
+    width: 100%;
+    height: 56px;
+    display: block;
+    color: #ACB9C7;
+    font-size: 14px;
+}
+#left-ul > div > a{
+    display: inline-block;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+    overflow: hidden;
+}
+#left-ul > div > a:hover{
+    cursor: pointer;
+    background-color: #263445;
+    text-decoration: none;
+}
+#left-ul > div > a > li{
+    padding: 0 20px;
+}
+/* 侧边栏 图标属性 */
+.ul-icon{
+    fill: currentColor;
+    width: 14px;
+    height: 14px;
+    margin-right: 16px;
+}
+/* 侧边栏 选中样式 */
+.active{
+    color: #3B8ADD !important;
+}
+
+/* 右边主体 */
+#right-div{
+    min-height: 100%;
+    margin-left: 200px;
+    position: relative;
+}
+/* 右边主体 头部 */
+#right-div .head-div{
+    height: 50px;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+/* 右边主体 头部 点击按钮属性 */
+.hamburger{
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+#hamburger-div{
+    line-height: 45px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+#head-right-menu{
+    float: right;
+    height: 100%;
+    line-height: 50px;
+    display: block;
+}
+/* 头部图标 */
+.head-icon{
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    vertical-align: middle;
+    fill: #5a5e66;
+}
+/* 搜索框 */
+.search-div{
+    height: 100%;
+    display: inline-block;
+    color: #5a5e66;
+    vertical-align: text-bottom;
+}
+#input-div{
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    width: 0;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#input-div > input{
+    font-size: 14px;
+    border-radius: 0;
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+    outline: none;
+    box-shadow: none !important;
+    border-bottom: 1px solid #d9d9d9;
+    vertical-align: middle;
+    line-height: initial;
+}
+#input-div > input::placeholder{
+    color: #C0C4CC;
+}
+
+/* 用户头像 */
+.user-div{
+    cursor: pointer;
+    margin-right: 30px;
+    display: inline-block;
+    padding: 0 8px;
+    height: 100%;
+    vertical-align: text-bottom;
+}
+#user-avatar{
+    margin-top: 5px;
+}
+#user-avatar > .user-avatar{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+#user-avatar > img{
+    vertical-align: top !important;
+}
+.menu-icon{
+    fill: #5F5E66;
+    width: 14px;
+    height: 14px;
+}
+
+/* 下拉菜单 */
+#menu-ul{
+    z-index: 4444;
+    position: absolute;
+    display: none;
+    top: 60px;
+    right: 40px;
+    max-width: 400px;
+    min-width: 100px;
+    background: #fff;
+    border: 1px solid #e6ebf5;
+    border-radius: 4px;
+    padding: 10px 0;
+    overflow: auto;
+}
+#menu-ul > a{
+    display: block;
+    text-decoration: none;
+    color: #5F5E66;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+#menu-ul > a:hover{
+    color: #6AA6FF;
+}

@@ -38,6 +38,11 @@ public class NearbyRefectoryApplicationTests {
 	}
 
 	@Test
+	public void getRefectoryList(){
+		System.out.println(refectoryService.findRefectoryByName("面").size());
+	}
+
+	@Test
 	public void updateRefectory(){
 		Refectory refectory = new Refectory();
 		double[] location = {105.946803,29.357331};

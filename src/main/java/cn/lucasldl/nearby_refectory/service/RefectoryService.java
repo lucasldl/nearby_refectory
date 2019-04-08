@@ -13,6 +13,8 @@ public interface RefectoryService {
 
     public Refectory findRefectoryById(Long id);
 
+    public List<Refectory> findRefectoryByName(String name);
+
     public String updateRefectoryById(Refectory refectory);
 
     public Pagination<Refectory> findAll(Integer pageSize, Integer pageNum);
