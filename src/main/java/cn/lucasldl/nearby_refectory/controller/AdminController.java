@@ -117,7 +117,7 @@ public class AdminController {
         Pagination<Refectory> page = refectoryService.findAll(pageSize, pageNum);
         model.addAttribute("result", page);
         model.addAttribute("isPage", 0);
-        return "/admin/index";
+        return "admin/index";
     }
 
 }

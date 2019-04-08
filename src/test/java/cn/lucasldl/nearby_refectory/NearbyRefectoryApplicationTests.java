@@ -49,7 +49,9 @@ public class NearbyRefectoryApplicationTests {
 		refectory.setId(20190403174312L)
 				.setLocation(location)
 				.setTitle("米线")
-				.setIntroduce("主营米线d");
+				.setIntroduce("主营米线d")
+				.setPhone("13154545")
+				.setAddress("永川");
 		System.out.println(refectoryService.updateRefectoryById(refectory));
 	}
 
