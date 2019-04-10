@@ -25,7 +25,7 @@ public class PageController {
 		return "login";
 	}
 
-	@RequestMapping({"/admin", "/admin/", "/index"})
+	@RequestMapping({"/admin", "/admin/", "/index", "", "/"})
 	public String index(){
 		return "redirect:/admin/index";
 	}

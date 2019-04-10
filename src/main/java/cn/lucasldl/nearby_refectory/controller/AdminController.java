@@ -85,7 +85,7 @@ public class AdminController {
     public String findByName(Model model, @RequestParam("name") String name){
         model.addAttribute("result", refectoryService.findRefectoryByName(name));
         model.addAttribute("isPage", 1);
-        return "/admin/index";
+        return "admin/index";
     }
 
     /**
